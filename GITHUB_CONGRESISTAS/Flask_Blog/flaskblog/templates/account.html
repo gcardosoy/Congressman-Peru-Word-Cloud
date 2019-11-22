@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Ingresa tu opinión</legend>
+                <div class="form-group">
+                    {{ form.inteligence.label(class="form-control-label") }}
+                    {% if form.inteligence.errors %}
+                        {{ form.inteligence(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.inteligence.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.inteligence(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.trust.label(class="form-control-label") }}
+                    {% if form.trust.errors %}
+                        {{ form.trust(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.trust.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.trust(class="form-control form-control-lg") }}
+                    {% endif %}
+
+
+                    {% for subfield in form %}
+                    <tr>
+                        <td>{{ subfield.label }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ subfield }}</td>
+
+                    </tr>
+                    {% endfor %}
+
+
+                </div>
+                <div class="form-group">
+                    {{ form.opinion.label(class="form-control-label") }}
+                    {% if form.opinion.errors %}
+                        {{ form.opinion(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.opinion.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.opinion(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
