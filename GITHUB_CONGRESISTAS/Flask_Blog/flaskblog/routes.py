@@ -7,6 +7,7 @@ import pandas as pd
 from flaskblog.congresistas import Congresistas
 
 @app.route("/")
+@login_required
 def home():
     df = Congresistas.getCongresistas()
     return render_template('congresistas.html', df = df)
