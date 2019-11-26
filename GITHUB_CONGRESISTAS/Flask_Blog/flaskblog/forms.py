@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskblog.models import User
 
@@ -36,3 +36,9 @@ class OpinionForm(FlaskForm):
     trust = RadioField('Confianza', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
     opinion = StringField('Opinión', validators=[DataRequired()])
     submit = SubmitField('Sign Up')
+
+class CongresistasSelectForm(FlaskForm):
+    congresista = SelectField('Congresista', validators=[DataRequired()], id='congresistaFormControlSelect')
+
+
+

@@ -1,13 +1,15 @@
 from flask import render_template, url_for, flash, redirect
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm
+from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm, CongresistasSelectForm
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
+import pandas as pd
+from flaskblog.congresistas import Congresistas
 
 @app.route("/")
-@app.route("/home")
 def home():
-    return render_template('home.html')
+    df = Congresistas.getCongresistas()
+    return render_template('congresistas.html', df = df)
 
 
 @app.route("/about")
