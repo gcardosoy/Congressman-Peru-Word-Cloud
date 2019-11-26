@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from flaskblog import app, db, bcrypt
 from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm, CongresistasSelectForm
 from flaskblog.models import User, Post
@@ -10,6 +10,16 @@ from flaskblog.congresistas import Congresistas
 def home():
     df = Congresistas.getCongresistas()
     return render_template('congresistas.html', df = df)
+
+@app.route("/wordcloud", methods=['GET', 'POST'])
+def wordcloud():
+    if request.method == 'POST':
+        form = request.form
+        congresista = form.get('congresistaSeleccionado')
+        imagePath = Congresistas.mostrarWordCloud(congresista)
+        return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresista)
+    
+    return congresista
 
 
 @app.route("/about")

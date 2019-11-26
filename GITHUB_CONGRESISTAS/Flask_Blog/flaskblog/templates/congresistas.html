@@ -4,7 +4,7 @@
     <form action="/wordcloud" method="POST">
       <div class="form-group">
         <label for="exampleFormControlSelect1">Seleccionar Congresista</label>
-        <select class="form-control" id="congresistaFormControlSelect">
+        <select class="form-control" id="congresistaFormControlSelect" name="congresistaSeleccionado">
           {% for index, row in df.iterrows() %}
           <option value = {% print(row["twitter_user"]) %} > {% print(row["name"]) %} </option>
           {% endfor %}

@@ -7,7 +7,7 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
 
-class Congresistas():
+class Congresistas:
 
   def initTwitterApi():
     ## Definiendo las variables para el acceso al API de twitter
@@ -43,8 +43,9 @@ class Congresistas():
                            ])
     return tweets_df
 
+
   def preprocessTweets(tweets_df):
-    tweets_df.drop_duplicates(subset=["id"], keep="first", inplace=True)
+    #tweets_df.drop_duplicates(subset=["id"], keep="first", inplace=True)
     tweets_df['full_text'] = tweets_df['full_text'].apply(lambda x: x.lower())
     tweets_df['full_text'] = tweets_df['full_text'].apply(lambda x: re.sub(r"(?:\@|https?\://)\S+", "", x))
     intab = "áéíóúïü"
@@ -57,7 +58,8 @@ class Congresistas():
     tweets_df["full_text"] = tweets_df["full_text"].apply(lambda x: " ".join(x for x in x.split() if len(x)>3))
     return tweets_df
 
-  def DrawWordCloud(df):
+
+  def DrawWordCloud( df):
       text = df["full_text"].values.tolist()
       words = str(text)
       words = re.sub("[^a-z]+", " ", words)
@@ -67,13 +69,34 @@ class Congresistas():
       plt.figure()
       plt.imshow(wordcloud, interpolation = "bilinear")
       plt.axis("off")
-      plt.show()
+      #plt.show()
+      return plt
 
 
   def getCongresistas():
       congresistas = pd.read_excel("congresistasCuentasTwitter.xlsx", sheet_name="congresistas")
-      columns = ["name","twitter_user","twitter_username","auxiliar_query"]
+      columns = ["name","twitter_user", "twitter_username","auxiliar_query"]
       congresistasDF = congresistas[columns]
       return congresistasDF
+
+  def mostrarWordCloud(user):
+      csv = "flaskblog/csv/congresista"+user+".csv"
+      
+      try:
+        data = pd.read_csv(csv)
+        
+        #imagen = Congresistas.DrawWordCloud(data)
+        imagenPath = "static/images/"+user+".png"
+        #imagen.savefig(imagenPath, dpi=50)
+        return imagenPath
+      except:
+          print('the whatever error occurred.')
+          return "Error"
+      
+
+
+
+
+
 
     
