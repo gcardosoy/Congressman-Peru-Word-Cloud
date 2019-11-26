@@ -79,3 +79,8 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+#radioHorizontal li{
+  display: inline-block;
+  margin: 0 40px 0 10px;
+}
