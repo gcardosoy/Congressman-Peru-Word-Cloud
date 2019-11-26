@@ -19,7 +19,7 @@ def wordcloud():
         congresista = form.get('congresistaSeleccionado')
         imagePath = Congresistas.mostrarWordCloud(congresista)
         return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresista)
-    
+
     return congresista
 
 
