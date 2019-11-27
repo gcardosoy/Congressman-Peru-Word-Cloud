@@ -6,6 +6,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
+import os
 
 class Congresistas:
 
@@ -63,9 +64,14 @@ class Congresistas:
       text = df["full_text"].values.tolist()
       words = str(text)
       words = re.sub("[^a-z]+", " ", words)
-
+      if words.strip() == '':
+        words = "CongresistaSinTweets"
       wordcloud = WordCloud(max_font_size = 50, max_words = 50, background_color = "white").generate(words)
-      wordcloud.to_file("flaskblog/"+filename)
+      if os.path.exists("flaskblog/"+filename):
+        print("Deleting file:" + str("flaskblog/"+filename))
+        os.remove("flaskblog/"+filename)
+      else:
+        wordcloud.to_file("flaskblog/"+filename)
       return filename
 
   @staticmethod
