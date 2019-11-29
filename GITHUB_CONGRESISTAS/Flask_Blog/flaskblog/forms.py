@@ -31,14 +31,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Iniciar Sesión')
 
 class OpinionForm(FlaskForm):
-
+    congresistaUser = StringField('congresistaUser')
     inteligence = RadioField('Inteligencia', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
     trust = RadioField('Confianza', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
     opinion = StringField('Opinión', validators=[DataRequired()])
-    submit = SubmitField('Sign Up')
-
-class CongresistasSelectForm(FlaskForm):
-    congresista = SelectField('Congresista', validators=[DataRequired()], id='congresistaFormControlSelect')
-
+    submit = SubmitField('Enviar Opinión')
 
 

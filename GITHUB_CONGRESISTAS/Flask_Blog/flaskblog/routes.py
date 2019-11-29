@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm, CongresistasSelectForm
+from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
@@ -11,17 +11,6 @@ from flaskblog.congresistas import Congresistas
 def home():
     df = Congresistas.getCongresistas()
     return render_template('congresistas.html', df = df)
-
-@app.route("/wordcloud", methods=['GET', 'POST'])
-def wordcloud():
-    if request.method == 'POST':
-        form = request.form
-        congresista = form.get('congresistaSeleccionado')
-        imagePath = Congresistas.mostrarWordCloud(congresista)
-        return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresista)
-
-    return congresista
-
 
 @app.route("/about")
 def about():
@@ -70,3 +59,24 @@ def account():
         flash(f'Gracias por opinar, {form.username.data}!', 'success')
         return redirect(url_for('home'))
     return render_template('account.html', title='Account', form=form)
+
+
+@app.route("/wordcloud", methods=['POST'])
+@login_required
+def wordcloud():
+    
+    if request.method == 'POST':
+        form = request.form
+        congresista = form.get('congresistaSeleccionado')
+        imagePath = Congresistas.mostrarWordCloud(congresista)
+        
+        return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresista, form=OpinionForm())
+
+
+@app.route("/enviaropinion", methods=['POST'])
+@login_required
+def enviaropinion ():
+
+    form = OpinionForm()
+
+    return form.congresistaUser.data

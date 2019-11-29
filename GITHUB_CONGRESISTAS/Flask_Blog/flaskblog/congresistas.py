@@ -6,6 +6,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
+import os
 
 class Congresistas:
 
@@ -58,40 +59,41 @@ class Congresistas:
     tweets_df["full_text"] = tweets_df["full_text"].apply(lambda x: " ".join(x for x in x.split() if len(x)>3))
     return tweets_df
 
-
-  def DrawWordCloud( df):
+  @staticmethod
+  def DrawWordCloud( df, filename):
       text = df["full_text"].values.tolist()
       words = str(text)
       words = re.sub("[^a-z]+", " ", words)
-
+      if words.strip() == '':
+        words = "CongresistaSinTweets"
       wordcloud = WordCloud(max_font_size = 50, max_words = 50, background_color = "white").generate(words)
+      if os.path.exists("flaskblog/"+filename):
+        print("Deleting file:" + str("flaskblog/"+filename))
+        os.remove("flaskblog/"+filename)
+      else:
+        wordcloud.to_file("flaskblog/"+filename)
+      return filename
 
-      plt.figure()
-      plt.imshow(wordcloud, interpolation = "bilinear")
-      plt.axis("off")
-      #plt.show()
-      return plt
-
-
+  @staticmethod
   def getCongresistas():
       congresistas = pd.read_excel("congresistasCuentasTwitter.xlsx", sheet_name="congresistas")
       columns = ["name","twitter_user", "twitter_username","auxiliar_query"]
       congresistasDF = congresistas[columns]
       return congresistasDF
 
+  @staticmethod
   def mostrarWordCloud(user):
       csv = "flaskblog/csv/congresista"+user+".csv"
       
       try:
         data = pd.read_csv(csv)
-        
-        #imagen = Congresistas.DrawWordCloud(data)
         imagenPath = "static/images/"+user+".png"
-        #imagen.savefig(imagenPath, dpi=50)
-        return imagenPath
-      except:
-          print('the whatever error occurred.')
-          return "Error"
+        imagen = Congresistas.DrawWordCloud(data, imagenPath)
+        
+        return imagen
+      except Exception as e:
+        print(e)
+        return "Error"
       
 
 
