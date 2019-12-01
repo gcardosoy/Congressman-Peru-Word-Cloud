@@ -6,17 +6,18 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
-import os
+import os, time
+from congressmanapp import app
 
 class Congresistas:
 
   def initTwitterApi():
     ## Definiendo las variables para el acceso al API de twitter
-    consumer_key = 'bUOP7MjK9SuqvrC3bSY7UKPRc'
-    consumer_secret = 'A8bVEFrjGIwfembBq2iRLdbLYIXRHijHubFuAsOjU2G7qHTH0m'
+    consumer_key = ''
+    consumer_secret = ''
 
-    access_token = '280215264-ZwiAz9j7H5Y5R4n7zxiMDVLZlwngGs7w2UYWOZZa'
-    access_token_secret = 'I4MAJOw7KngfRQCLC1GEj1jmLxk1a77vOu2faVDro64ox'
+    access_token = ''
+    access_token_secret = ''
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
@@ -67,36 +68,53 @@ class Congresistas:
       if words.strip() == '':
         words = "CongresistaSinTweets"
       wordcloud = WordCloud(max_font_size = 50, max_words = 50, background_color = "white").generate(words)
-      if os.path.exists("flaskblog/"+filename):
-        print("Deleting file:" + str("flaskblog/"+filename))
-        os.remove("flaskblog/"+filename)
+      if os.path.exists("congressmanapp/"+filename):
+        print("Deleting file:" + str("congressmanapp/"+filename))
+        os.remove("congressmanapp/"+filename)
       else:
-        wordcloud.to_file("flaskblog/"+filename)
+        wordcloud.to_file("congressmanapp/"+filename)
+        time.sleep(2)
+
       return filename
 
   @staticmethod
   def getCongresistas():
       congresistas = pd.read_excel("congresistasCuentasTwitter.xlsx", sheet_name="congresistas")
-      columns = ["name","twitter_user", "twitter_username","auxiliar_query"]
+      columns = ["partido", "name", "twitter_user", "twitter_username", "auxiliar_query", "img", "email"]
       congresistasDF = congresistas[columns]
       return congresistasDF
 
   @staticmethod
   def mostrarWordCloud(user):
-      csv = "flaskblog/csv/congresista"+user+".csv"
-      
+      csv = "congressmanapp/csv/congresista"+user+".csv"
+      #csv = os.path.join(app.instance_path, 'csv', user+".csv")
       try:
         data = pd.read_csv(csv)
         imagenPath = "static/images/"+user+".png"
+        #imagenPath = os.path.join(app.instance_path, 'static/images', user+".png")
         imagen = Congresistas.DrawWordCloud(data, imagenPath)
-        
         return imagen
       except Exception as e:
         print(e)
         return "Error"
       
+  @staticmethod
+  def getWordCloud(user):
+    filename = "static/wordcloudimages/img_" + user + ".png"
+    return filename
 
+  def getCongresista(user):
+    df = Congresistas.getCongresistas()
+    print(user)
+    try:
+      x = df.loc[df["twitter_user"] == user]
+      #l = [k for k in x["name"]]
+      return x.to_dict('list')
+    except Exception as e:
+      print(e)
+      return ""
 
+    
 
 
 

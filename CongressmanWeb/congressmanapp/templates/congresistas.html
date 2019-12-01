@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="container" id="selector"> 
-    <form action="/wordcloud" method="POST">
+
+
+<div class="row">
+  <div class="row">
+
+      <form action="/wordcloud" method="POST">
       <div class="form-group">
         <label for="exampleFormControlSelect1">Seleccionar Congresista</label>
         <select class="form-control" id="congresistaFormControlSelect" name="congresistaSeleccionado">
@@ -14,11 +18,22 @@
 
     </form>
   </div>
-  
+    
+  <div class="row" id="seleccionarPorFoto">
+    
 
-  <div class="container" id="wordcloud"> 
+      {% for index, row in df.iterrows() %}
+      <a href="{{ url_for('wordcloudcongresista' , twitter_user = row['twitter_user']  ) }}">
+        <img src="{% print(row['img']) %}" title="{% print(row['twitter_name']) %}">
+      </a>
+      {% endfor %}
+
+
 
   </div>
+
+</div>
+
 
 
 {% endblock content %}

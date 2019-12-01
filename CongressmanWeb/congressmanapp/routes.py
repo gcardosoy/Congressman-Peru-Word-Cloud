@@ -1,10 +1,11 @@
 from flask import render_template, url_for, flash, redirect, request
-from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, OpinionForm
-from flaskblog.models import User, Post
+from congressmanapp import app, db, bcrypt
+from congressmanapp.forms import RegistrationForm, LoginForm, OpinionForm
+from congressmanapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
-from flaskblog.congresistas import Congresistas
+from congressmanapp.congresistas import Congresistas
+import time
 
 @app.route("/")
 @login_required
@@ -67,10 +68,38 @@ def wordcloud():
     
     if request.method == 'POST':
         form = request.form
-        congresista = form.get('congresistaSeleccionado')
-        imagePath = Congresistas.mostrarWordCloud(congresista)
+        congresistaUser = form.get('congresistaSeleccionado')
+        #imagePath = Congresistas.mostrarWordCloud(congresista)
+        imagePath = Congresistas.getWordCloud(congresistaUser)
+        print(imagePath)
+
+        congresistaInfo = Congresistas.getCongresista(congresistaUser)
+
+        return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
+            twitter_user = congresistaUser, 
+            congresistaName = ''.join(congresistaInfo["twitter_username"]),
+            congresistaImg = ''.join(congresistaInfo["img"]))
+
         
-        return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresista, form=OpinionForm())
+@app.route("/wordcloud/<string:twitter_user>/", methods=['GET'])
+@login_required
+def wordcloudcongresista(twitter_user):
+    
+    if request.method == 'GET':
+        
+        congresistaUser = twitter_user
+        print(congresistaUser)
+        imagePath = "../../"+Congresistas.getWordCloud(congresistaUser)
+        print(imagePath)
+        #return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresistaUser, form=OpinionForm())
+
+        congresistaInfo = Congresistas.getCongresista(congresistaUser)
+
+
+        return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
+            twitter_user = congresistaUser, 
+            congresistaName = ''.join(congresistaInfo["twitter_username"]),
+            congresistaImg = ''.join(congresistaInfo["img"]))
 
 
 @app.route("/enviaropinion", methods=['POST'])

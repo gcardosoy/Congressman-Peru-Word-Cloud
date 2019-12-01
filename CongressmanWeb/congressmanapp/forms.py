@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flaskblog.models import User
+from congressmanapp.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Usuario',
@@ -34,7 +34,7 @@ class OpinionForm(FlaskForm):
     congresistaUser = StringField('congresistaUser')
     inteligence = RadioField('Inteligencia', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
     trust = RadioField('Confianza', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
-    opinion = StringField('Opinión', validators=[DataRequired()])
+    opinion = StringField('Comenta aquí', validators=[DataRequired()])
     submit = SubmitField('Enviar Opinión')
 
 

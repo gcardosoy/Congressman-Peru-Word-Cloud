@@ -13,4 +13,4 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 
-from flaskblog import routes
+from congressmanapp import routes
