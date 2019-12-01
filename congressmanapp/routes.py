@@ -5,7 +5,6 @@ from congressmanapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
 from congressmanapp.congresistas import Congresistas
-import time
 
 @app.route("/")
 @login_required

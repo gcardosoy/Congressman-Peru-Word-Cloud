@@ -6,7 +6,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
-import os, time
+import os
 from congressmanapp import app
 
 class Congresistas:
@@ -73,7 +73,6 @@ class Congresistas:
         os.remove("congressmanapp/"+filename)
       else:
         wordcloud.to_file("congressmanapp/"+filename)
-        time.sleep(2)
 
       return filename
 
