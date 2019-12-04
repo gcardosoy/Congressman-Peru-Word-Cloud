@@ -8,9 +8,13 @@ from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
 import os
 from congressmanapp import app
+from congressmanapp import sentiment
 
 class Congresistas:
 
+  modelo = sentiment.SentimentModel()
+
+    
   def initTwitterApi():
     ## Definiendo las variables para el acceso al API de twitter
     consumer_key = ''
@@ -123,7 +127,25 @@ class Congresistas:
       print(e)
       return 0,0
 
+  def saveOpinion( user, opinion):
+    csv = "congressmanapp/csv/congresista"+user+".csv"
+    try:
+      data = pd.read_csv(csv)
+      print(data.shape)
+      s = Congresistas.modelo.Predict(opinion)
+      print(s)
+      data2 = data.append( {"full_text": str(opinion), "sentiment": str(s) }, ignore_index=True)
+      print(data2.shape)
+      print(csv)
+      if os.path.exists(csv):
+        print("Deleting file:" + str(csv))
+        os.remove(csv)
+      data2.to_csv(csv, index=False)
 
+      return "(Comentario " + str(s) + ")" + " You Opinion was saved with success!"
+    except Exception as e:
+      print(e)
+      return "Opinion failed to save!"
 
 
 

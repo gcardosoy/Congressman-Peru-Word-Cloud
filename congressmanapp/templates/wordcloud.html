@@ -55,34 +55,7 @@
             {{ form.hidden_tag() }}
             <div class="form-group">
                 <legend class="border-bottom"><h4 style="color: green"> Y tú que opinas? </h4></legend>
-                <!--
-                <div class="form-group" id="radioHorizontal">
-                    {{ form.inteligence.label(class="form-control-label") }}
-                    {% if form.inteligence.errors %}
-                        {{ form.inteligence(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.inteligence.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.inteligence(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group" id="radioHorizontal">
-                    {{ form.trust.label(class="form-control-label") }}
-                    {% if form.trust.errors %}
-                        {{ form.trust(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.trust.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.trust(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                -->
+                
             </div>
             <div class="form-group">
                 {{ form.opinion.label(class="form-control-label") }}

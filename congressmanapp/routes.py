@@ -113,5 +113,14 @@ def wordcloudcongresista(twitter_user):
 def enviaropinion ():
 
     form = OpinionForm()
+    newOpinion = form.opinion.data
+    user = form.congresistaUser.data
 
-    return form.congresistaUser.data
+    message = Congresistas.saveOpinion(user, newOpinion)
+    flash(message, 'success')
+
+    return redirect (url_for('wordcloudcongresista' , twitter_user = user))
+
+
+
+
