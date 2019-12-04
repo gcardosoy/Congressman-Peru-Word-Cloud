@@ -1,7 +1,6 @@
-full_text
-"congresista, sigue desubicado."
-"#tuitdeldia comenta comparte ""tuit dia"" congresista muerte policia chanchamayo intentar frustrar robo."
-refieres fuji
-peru quiere gobierno presidente martinvizcarra recuerdalo
-keiko
-""
+full_text,sentiment
+"congresista, sigue desubicado.",negativo
+"#tuitdeldia comenta comparte ""tuit dia"" congresista muerte policia chanchamayo intentar frustrar robo.",positivo
+refieres fuji,positivo
+peru quiere gobierno presidente martinvizcarra recuerdalo,positivo
+keiko,positivo

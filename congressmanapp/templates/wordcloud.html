@@ -26,6 +26,8 @@
             </h3> 
         </div>
     </div>
+    <hr>
+    
 
     <hr>
 
@@ -33,6 +35,14 @@
         <div class="col"><img src="{% print(congresistaImg) %}"  class="rounded mx-auto d-block"></div>
         <div class="col"><img src="{% print(imagen) %}"  class="rounded mx-auto d-block"></div>
 
+    </div>
+    Posivite Tweets
+    <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar" style="width: {{100*pos/(pos+neg+0.00001)}}%" aria-valuenow="{{100*pos/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{pos}} </div>
+    </div>
+    Negative Tweets
+    <div class="progress">
+      <div class="progress-bar bg-danger" role="progressbar" style="width: {{100*neg/(pos+neg+0.00001)}}%" aria-valuenow="{{100*neg/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{neg}} </div>
     </div>
 
     <hr>

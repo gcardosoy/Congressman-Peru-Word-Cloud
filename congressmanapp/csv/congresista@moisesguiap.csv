@@ -1,6 +1,6 @@
-full_text
-"lejos estimado, puedo darte catedra seguridad."
-seguridad ferreteria.
-"quedate nomas, completos."
-"jajaja pendejos moises, despues hacer practicamente region ahora vacaciones."
-comprando focos
+full_text,sentiment
+"lejos estimado, puedo darte catedra seguridad.",positivo
+seguridad ferreteria.,negativo
+"quedate nomas, completos.",positivo
+"jajaja pendejos moises, despues hacer practicamente region ahora vacaciones.",negativo
+comprando focos,negativo

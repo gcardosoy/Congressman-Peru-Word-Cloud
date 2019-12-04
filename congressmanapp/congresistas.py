@@ -113,6 +113,34 @@ class Congresistas:
       print(e)
       return ""
 
+  def getSentimentValues(user):
+    csv = "congressmanapp/csv/congresista"+user+".csv"
+    try:
+      data = pd.read_csv(csv)
+      vc = data["sentiment"].value_counts().to_dict()
+      return vc['positivo'], vc['negativo']
+    except Exception as e:
+      print(e)
+      return 0,0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 

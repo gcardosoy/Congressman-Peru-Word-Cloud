@@ -1,7 +1,7 @@
-full_text
-denuncia.....no? cuentazo?
-denuncio “cuentazo”?
-denuncio “cuentazo”?
-hizo denuncia puro cuentazo? denunciado puede postular?:
-medida cautelar tasa letona olvido denunciar encargada segun refiere
-"medida cautelar tasa anula, pesca negra"
+full_text,sentiment
+denuncia.....no? cuentazo?,positivo
+denuncio “cuentazo”?,positivo
+denuncio “cuentazo”?,positivo
+hizo denuncia puro cuentazo? denunciado puede postular?:,positivo
+medida cautelar tasa letona olvido denunciar encargada segun refiere,positivo
+"medida cautelar tasa anula, pesca negra",positivo

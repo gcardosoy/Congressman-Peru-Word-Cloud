@@ -1,11 +1,11 @@
-full_text
-"llamados""hijos corrupcion""su etica totalmente tergiversada acto delincuencial justificado crecieron premisas gozaron dinero ilicito.y vienen nietos corrupcion"
-alucina acaba entrar camiseta flamengo...asi poseros conchasumare...y calabaza chapa cholos plata mafia educativa tambien. enfin...bye.
-"demuestren primera huevos traigan triunfo huanuco, nica bobo sucede paso vallejo, ponganle poquito corazon pone manucci veran resultados"
-"alianza progreso, organizacion llena corruptos, miles ejemplos edwin donayre. traiciono peru preso. sinonimo corrupcion."
-"acuña lleva cabeza lista chehade,ex dirigente humalista cuestionado, acuña lleva cabeza lista antauro humala, personaje sentenciado hermanito setenciado años.¿estos quieren gobernar?"
-"mismo...plata cancha, cero honradez."
-"bien dicho, pais lleno varias ratas solo fujiapristas, mafia señor acuña solo quiere gobierno hacer plata cancha. trabajemos equipo junto lucha corrupcion, votemos bien!!"
-"bueno peru politico hijo lavadores dinero, chibola nadie comenta pedofilo. normalizado platax sucia."
-terrorismo reina azucarera lambayecana policia hace oidos sordos. pasa
-"puta madre, trujillo carajo! bien vivas sino pares fuera, gobierno regional alcaldia tuyos, ensartas huevones estan peleandose?? parchen pistas trujillo, esran hecho mierda!"
+full_text,sentiment
+"llamados""hijos corrupcion""su etica totalmente tergiversada acto delincuencial justificado crecieron premisas gozaron dinero ilicito.y vienen nietos corrupcion",negativo
+alucina acaba entrar camiseta flamengo...asi poseros conchasumare...y calabaza chapa cholos plata mafia educativa tambien. enfin...bye.,positivo
+"demuestren primera huevos traigan triunfo huanuco, nica bobo sucede paso vallejo, ponganle poquito corazon pone manucci veran resultados",negativo
+"alianza progreso, organizacion llena corruptos, miles ejemplos edwin donayre. traiciono peru preso. sinonimo corrupcion.",positivo
+"acuña lleva cabeza lista chehade,ex dirigente humalista cuestionado, acuña lleva cabeza lista antauro humala, personaje sentenciado hermanito setenciado años.¿estos quieren gobernar?",positivo
+"mismo...plata cancha, cero honradez.",positivo
+"bien dicho, pais lleno varias ratas solo fujiapristas, mafia señor acuña solo quiere gobierno hacer plata cancha. trabajemos equipo junto lucha corrupcion, votemos bien!!",negativo
+"bueno peru politico hijo lavadores dinero, chibola nadie comenta pedofilo. normalizado platax sucia.",positivo
+terrorismo reina azucarera lambayecana policia hace oidos sordos. pasa,positivo
+"puta madre, trujillo carajo! bien vivas sino pares fuera, gobierno regional alcaldia tuyos, ensartas huevones estan peleandose?? parchen pistas trujillo, esran hecho mierda!",positivo

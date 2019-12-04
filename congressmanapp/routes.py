@@ -73,11 +73,15 @@ def wordcloud():
         print(imagePath)
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
+        positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
 
         return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
             twitter_user = congresistaUser, 
             congresistaName = ''.join(congresistaInfo["twitter_username"]),
-            congresistaImg = ''.join(congresistaInfo["img"]))
+            congresistaImg = ''.join(congresistaInfo["img"]),
+            pos = positivo,
+            neg = negativo
+            )
 
         
 @app.route("/wordcloud/<string:twitter_user>/", methods=['GET'])
@@ -93,12 +97,15 @@ def wordcloudcongresista(twitter_user):
         #return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresistaUser, form=OpinionForm())
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
-
+        positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
 
         return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
             twitter_user = congresistaUser, 
             congresistaName = ''.join(congresistaInfo["twitter_username"]),
-            congresistaImg = ''.join(congresistaInfo["img"]))
+            congresistaImg = ''.join(congresistaInfo["img"]),
+            pos = positivo,
+            neg = negativo
+            )
 
 
 @app.route("/enviaropinion", methods=['POST'])

@@ -1,11 +1,10 @@
-full_text
-¿cual lista?
-"jajajaajaj, pasa fumar pasto."
-"imposible trotskysta comprenda significa amor familiar. dentro moral alguna, usan amedrentarnos. merecen respeto alguno. viven animales unico esperan adquirir poder satisfacer apetitos."
-"averigue primero ""devolucion"" primero haciendo ridiculo desinformacion."
-estimada entablele demanda difamacion connotada legisladora congreso disuelto!
-señora sigrid olvida suegro acudir regularmente entonces decir solo enterarse
-katerine!! actitud excongresistas gino costas belaunde llama lealtad peru'. corruptos fujiapristas. viva peru'.
-""
-voluntad pueblo mostro bartra eligio candidato dedo.
-amen
+full_text,sentiment
+¿cual lista?,positivo
+"jajajaajaj, pasa fumar pasto.",negativo
+"imposible trotskysta comprenda significa amor familiar. dentro moral alguna, usan amedrentarnos. merecen respeto alguno. viven animales unico esperan adquirir poder satisfacer apetitos.",negativo
+"averigue primero ""devolucion"" primero haciendo ridiculo desinformacion.",negativo
+estimada entablele demanda difamacion connotada legisladora congreso disuelto!,positivo
+señora sigrid olvida suegro acudir regularmente entonces decir solo enterarse,negativo
+katerine!! actitud excongresistas gino costas belaunde llama lealtad peru'. corruptos fujiapristas. viva peru'.,negativo
+voluntad pueblo mostro bartra eligio candidato dedo.,positivo
+amen,positivo

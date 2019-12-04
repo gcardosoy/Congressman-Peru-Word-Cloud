@@ -1,11 +1,11 @@
-full_text
-"corruptos deben pagar, actual presidente demuestran dicen pague, deben presos humala, jode encima salgan programas inocentes, corrupcion venga debe combatirse"
-"alrededor corrupcion gobernante proceso acusacion seguro elegiste, alcaldesa representante ""moral"" obvio elegiste lujo ppk, obsesion llevo"
-"quieres realmente sucede alrededor, llamas odio puedes encontrar explicacion, vives negacion fanatismo sentido, ganas salvo medio vida"
-odio mas.
-"confundas, odio justicia"
-basta odios venganzas pedimos #libertad #justicia #fujimorilibertad
-lamentablemente odio fuerte razon peru.
-"equivocas decir peru gracias ""pais"" tomado comunistas delincuencia renuncio... legado traicionado hija chupamedias rea..."
-"libertad presidente a.f. hija, presa lider"
-"presidente sueños, realidad"
+full_text,sentiment
+"corruptos deben pagar, actual presidente demuestran dicen pague, deben presos humala, jode encima salgan programas inocentes, corrupcion venga debe combatirse",negativo
+"alrededor corrupcion gobernante proceso acusacion seguro elegiste, alcaldesa representante ""moral"" obvio elegiste lujo ppk, obsesion llevo",negativo
+"quieres realmente sucede alrededor, llamas odio puedes encontrar explicacion, vives negacion fanatismo sentido, ganas salvo medio vida",negativo
+odio mas.,positivo
+"confundas, odio justicia",positivo
+basta odios venganzas pedimos #libertad #justicia #fujimorilibertad,positivo
+lamentablemente odio fuerte razon peru.,positivo
+"equivocas decir peru gracias ""pais"" tomado comunistas delincuencia renuncio... legado traicionado hija chupamedias rea...",positivo
+"libertad presidente a.f. hija, presa lider",positivo
+"presidente sueños, realidad",positivo
