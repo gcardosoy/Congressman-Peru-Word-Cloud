@@ -1,81 +1,70 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<!--
-  <div class="container">
-    <form>
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1"> <h3 style="color: green"> Y tú que opinas? </h3> </label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-success">Enviar Opinión</button>
-    <a class="btn btn-info" href="/" >Seleccionar Congresista</a>
-  </form>
-
-  </div>
--->
-  <div class="container">
-    <div class="row">
-        <div class="col"> 
-            <h1> {{congresistaName}} </h1>
-            <h3 style="color:#8004F5"> 
-                <img src="/static/images/twitter.ico">
-                <a href="http://www.twitter.com/{{twitter_user}}" target="_blank" >
-                  {{twitter_user}} 
-                </a> 
-            </h3> 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1> {{ congresistaName }} </h1>
+                <h3 style="color:#8004F5">
+                    <img src="/static/images/twitter.ico">
+                    <a href="http://www.twitter.com/{{ twitter_user }}" target="_blank">
+                        {{ twitter_user }}
+                    </a>
+                </h3>
+            </div>
         </div>
+
+
+        <hr>
+
+        <div class="row">
+            <div class="col"><img src="{% print(congresistaImg) %}" class="rounded mx-auto d-block"></div>
+            <div class="col"><img src="{% print(imagen) %}" class="rounded mx-auto d-block"></div>
+
+        </div>
+        Posivite Tweets
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{ 100*pos/(pos+neg+0.00001)}}%"
+                 aria-valuenow="{{ 100*pos/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{ pos }} </div>
+        </div>
+        Negative Tweets
+        <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ 100*neg/(pos+neg+0.00001)}}%"
+                 aria-valuenow="{{ 100*neg/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{ neg }} </div>
+        </div>
+
+        <hr>
     </div>
-    <hr>
-    
-
-    <hr>
-
-    <div class="row">
-        <div class="col"><img src="{% print(congresistaImg) %}"  class="rounded mx-auto d-block"></div>
-        <div class="col"><img src="{% print(imagen) %}"  class="rounded mx-auto d-block"></div>
-
-    </div>
-    Posivite Tweets
-    <div class="progress">
-      <div class="progress-bar bg-success" role="progressbar" style="width: {{100*pos/(pos+neg+0.00001)}}%" aria-valuenow="{{100*pos/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{pos}} </div>
-    </div>
-    Negative Tweets
-    <div class="progress">
-      <div class="progress-bar bg-danger" role="progressbar" style="width: {{100*neg/(pos+neg+0.00001)}}%" aria-valuenow="{{100*neg/(pos+neg+0.00001)}}" aria-valuemin="0" aria-valuemax="100">{{neg}} </div>
-    </div>
-
-    <hr>
-</div>
 
 
-        <form method="POST" action="/enviaropinion">
-            <input type="hidden" id="congresista" name="congresistaUser" value="{{twitter_user}}">
+    <form method="POST" action="/enviaropinion">
+        <input type="hidden" id="congresista" name="congresistaUser" value="{{ twitter_user }}">
 
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                <legend class="border-bottom"><h4 style="color: green"> Y tú que opinas? </h4></legend>
-                
-            </div>
-            <div class="form-group">
-                {{ form.opinion.label(class="form-control-label") }}
-                {% if form.opinion.errors %}
-                    {{ form.opinion(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.opinion.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}                    
-                    <textarea name="opinion" class="form-control form-control-lg" id="opinion" rows="3" required type="text"></textarea>
-                {% endif %}
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <legend class="border-bottom"><h4 style="color: green"> Y tú que opinas? </h4></legend>
 
-            </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-                <a class="btn btn-outline-primary" href="/" >Cancelar</a>
-            </div>
-        </form>
+        </div>
+        <div class="form-group">
+            {{ form.opinion.label(class="form-control-label") }}
+            {% if form.opinion.errors %}
+                {{ form.opinion(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.opinion.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <textarea name="opinion" class="form-control form-control-lg" id="opinion" rows="3" required
+                          type="text"></textarea>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+            <a class="btn btn-outline-primary" href="/">Cancelar</a>
+        </div>
+    </form>
 
 
 

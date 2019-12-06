@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-
+<div class="col-md-8">
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -50,5 +50,5 @@
             ¿Necesitas una cuenta? <a class="ml-2" href="{{ url_for('register') }}">Regístrate ahora</a>
         </small>
     </div>
-
+</div>
 {% endblock content %}

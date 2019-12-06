@@ -6,11 +6,25 @@ from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
 from congressmanapp.congresistas import Congresistas
 
+
 @app.route("/")
 @login_required
 def home():
-    df = Congresistas.getCongresistas()
-    return render_template('congresistas.html', df = df)
+    return redirect(url_for('bancadas'))
+
+
+@app.route("/bancadas")
+@login_required
+def bancadas():
+    df = Congresistas.getPartidos()
+    return render_template('partidos.html', df=df)
+
+@app.route("/bancadas/<string:bancada_id>")
+@login_required
+def congresistasPorBancada(bancada_id):
+    df = Congresistas.getCongresistasPorBancada(bancada_id)
+    return render_template('congresistas.html', df=df)
+
 
 @app.route("/about")
 def about():
@@ -24,7 +38,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created!', 'success')
@@ -46,10 +60,12 @@ def login():
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 
 @app.route("/account")
 @login_required
@@ -64,54 +80,50 @@ def account():
 @app.route("/wordcloud", methods=['POST'])
 @login_required
 def wordcloud():
-    
     if request.method == 'POST':
         form = request.form
         congresistaUser = form.get('congresistaSeleccionado')
-        #imagePath = Congresistas.mostrarWordCloud(congresista)
+        # imagePath = Congresistas.mostrarWordCloud(congresista)
         imagePath = Congresistas.getWordCloud(congresistaUser)
         print(imagePath)
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
         positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
 
-        return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
-            twitter_user = congresistaUser, 
-            congresistaName = ''.join(congresistaInfo["twitter_username"]),
-            congresistaImg = ''.join(congresistaInfo["img"]),
-            pos = positivo,
-            neg = negativo
-            )
+        return render_template('wordcloud.html', imagen=imagePath, form=OpinionForm(),
+                               twitter_user=congresistaUser,
+                               congresistaName=''.join(congresistaInfo["twitter_username"]),
+                               congresistaImg=''.join(congresistaInfo["img"]),
+                               pos=positivo,
+                               neg=negativo
+                               )
 
-        
+
 @app.route("/wordcloud/<string:twitter_user>/", methods=['GET'])
 @login_required
 def wordcloudcongresista(twitter_user):
-    
     if request.method == 'GET':
-        
         congresistaUser = twitter_user
         print(congresistaUser)
-        imagePath = "../../"+Congresistas.getWordCloud(congresistaUser)
+        imagePath = "../../" + Congresistas.getWordCloud(congresistaUser)
         print(imagePath)
-        #return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresistaUser, form=OpinionForm())
+        # return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresistaUser, form=OpinionForm())
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
         positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
 
-        return render_template('wordcloud.html', imagen = imagePath, form=OpinionForm(), 
-            twitter_user = congresistaUser, 
-            congresistaName = ''.join(congresistaInfo["twitter_username"]),
-            congresistaImg = ''.join(congresistaInfo["img"]),
-            pos = positivo,
-            neg = negativo
-            )
+        return render_template('wordcloud.html', imagen=imagePath, form=OpinionForm(),
+                               twitter_user=congresistaUser,
+                               congresistaName=''.join(congresistaInfo["twitter_username"]),
+                               congresistaImg=''.join(congresistaInfo["img"]),
+                               pos=positivo,
+                               neg=negativo
+                               )
 
 
 @app.route("/enviaropinion", methods=['POST'])
 @login_required
-def enviaropinion ():
-
+def enviaropinion():
     form = OpinionForm()
     newOpinion = form.opinion.data
     user = form.congresistaUser.data
@@ -119,8 +131,4 @@ def enviaropinion ():
     message = Congresistas.saveOpinion(user, newOpinion)
     flash(message, 'success')
 
-    return redirect (url_for('wordcloudcongresista' , twitter_user = user))
-
-
-
-
+    return redirect(url_for('wordcloudcongresista', twitter_user=user))
