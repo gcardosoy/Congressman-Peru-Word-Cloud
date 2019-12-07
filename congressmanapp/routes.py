@@ -10,7 +10,7 @@ from congressmanapp.congresistas import Congresistas
 @app.route("/")
 @login_required
 def home():
-    return redirect(url_for('bancadas'))
+    return redirect(url_for('login'))
 
 
 @app.route("/bancadas")
@@ -27,6 +27,7 @@ def congresistasPorBancada(bancada_id):
 
 
 @app.route("/about")
+@login_required
 def about():
     return render_template('about.html', title='About')
 
@@ -49,13 +50,13 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('bancadas'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            return redirect(url_for('home'))
+            return redirect(url_for('bancadas'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
