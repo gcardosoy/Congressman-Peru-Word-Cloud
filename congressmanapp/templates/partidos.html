@@ -1,14 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container">
-
-
+        <h3>Partidos Políticos</h3>
+        <hr>
         {% for index, row in df.iterrows() %}
-            <a href="{{ url_for('congresistasPorBancada' , bancada_id = row['partido_id']  ) }}">
-                <img src="{% print(row['partido_logo']) %}" title="{% print(row['partido']) %}" class="img-thumbnail">
-            </a>
-        {% endfor %}
 
+            <a href="{{ url_for('congresistasPorBancada' , bancada_id = row['partido_id']  ) }}">
+
+                <img src="{% print(row['partido_logo']) %}" title="{% print(row['partido']) %}"
+                     class="rounded"
+                     width="200" height="200" data-toggle="tooltip"
+                     data-placement="top">
+            </a>
+
+        {% endfor %}
     </div>
 
 {% endblock content %}

@@ -18,7 +18,10 @@
         <hr>
 
         <div class="row">
-            <div class="col"><img src="{% print(congresistaImg) %}" class="rounded mx-auto d-block"></div>
+            <div class="col"><img src="{% print(congresistaImg) %}" class="rounded mx-auto d-block"
+                                  title="{{ congresistaName }}"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"></div>
             <div class="col"><img src="{% print(imagen) %}" class="rounded mx-auto d-block"></div>
 
         </div>
