@@ -1,4 +1,4 @@
-entrypoint: "gunicorn --timeout 60 -b :$PORT app:app"
+entrypoint: "gunicorn -t 60 -b :$PORT app:app"
 env: flex
 runtime: python
 runtime_config:
