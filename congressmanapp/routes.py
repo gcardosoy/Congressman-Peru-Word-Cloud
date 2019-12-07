@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from congressmanapp import app, db, bcrypt
-from congressmanapp.forms import RegistrationForm, LoginForm, OpinionForm
+from congressmanapp.forms import RegistrationForm, LoginForm, OpinionForm, LoginPublicForm
 from congressmanapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
@@ -61,6 +61,21 @@ def login():
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+
+@app.route("/publicLogin", methods=['GET', 'POST'])
+def loginpublic():
+    if current_user.is_authenticated:
+        return redirect(url_for('bancadas'))
+
+    vemail = "public@gmail.com"
+    vpassword = "123"
+
+    user = User.query.filter_by(email=vemail).first()
+    if user and bcrypt.check_password_hash(user.password, vpassword):
+        login_user(user, remember=True)
+        return redirect(url_for('bancadas'))
+
+    return render_template('login.html', title='Login', form=LoginForm())
 
 @app.route("/logout")
 def logout():

@@ -30,6 +30,12 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Recuerdame')
     submit = SubmitField('Iniciar Sesión')
 
+class LoginPublicForm(FlaskForm):
+    email = "public@gmail.com"
+    password = "123"
+    remember = False
+    submit = SubmitField('Iniciar como Invitado')
+
 class OpinionForm(FlaskForm):
     congresistaUser = StringField('congresistaUser')
     inteligence = RadioField('Inteligencia', choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], validators=[DataRequired()])
