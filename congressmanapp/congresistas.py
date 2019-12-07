@@ -14,7 +14,7 @@ class Congresistas:
         congresistas = pd.read_excel("congresistasCuentasTwitter.xlsx", sheet_name="congresistas")
         columns = ["partido_id", "partido", "name", "twitter_user", "twitter_username", "auxiliar_query", "img",
                    "email"]
-        congresistasDF = congresistas[columns]
+        congresistasDF = congresistas[columns].dropna()
         return congresistasDF
 
     @staticmethod
@@ -23,7 +23,7 @@ class Congresistas:
         columns = ["partido_id", "partido", "name", "twitter_user", "twitter_username", "auxiliar_query", "img",
                    "email"]
         x = congresistas.loc[congresistas["partido_id"] == bancada_id]
-        congresistasDF = x[columns]
+        congresistasDF = x[columns].dropna()
         return congresistasDF
 
     @staticmethod
