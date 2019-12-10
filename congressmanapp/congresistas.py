@@ -35,6 +35,10 @@ class Congresistas:
         filename = "static/wordcloudimages/img_" + user + ".png"
         return filename
 
+    def getWordCloudComercio(user):
+        filename = "static/wordcloudcomercio/img_" + user + ".png"
+        return filename
+
     def getCongresista(user):
         df = Congresistas.getCongresistas()
         print(user)

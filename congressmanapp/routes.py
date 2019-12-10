@@ -102,6 +102,8 @@ def wordcloud():
         # imagePath = Congresistas.mostrarWordCloud(congresista)
         imagePath = Congresistas.getWordCloud(congresistaUser)
         print(imagePath)
+        imagenComercio = Congresistas.getWordCloudComercio(congresistaUser)
+        print(imagenComercio)
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
         positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
@@ -111,7 +113,8 @@ def wordcloud():
                                congresistaName=''.join(congresistaInfo["twitter_username"]),
                                congresistaImg=''.join(congresistaInfo["img"]),
                                pos=positivo,
-                               neg=negativo
+                               neg=negativo,
+                               imagenComercio = imagenComercio
                                )
 
 
@@ -123,7 +126,9 @@ def wordcloudcongresista(twitter_user):
         print(congresistaUser)
         imagePath = "../../" + Congresistas.getWordCloud(congresistaUser)
         print(imagePath)
-        # return render_template('wordcloud.html', imagen = imagePath, twitter_user = congresistaUser, form=OpinionForm())
+
+        imagenComercio = "../../"+Congresistas.getWordCloudComercio(congresistaUser)
+        print(imagenComercio)
 
         congresistaInfo = Congresistas.getCongresista(congresistaUser)
         positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
@@ -133,7 +138,8 @@ def wordcloudcongresista(twitter_user):
                                congresistaName=''.join(congresistaInfo["twitter_username"]),
                                congresistaImg=''.join(congresistaInfo["img"]),
                                pos=positivo,
-                               neg=negativo
+                               neg=negativo,
+                               imagenComercio=imagenComercio
                                )
 
 
