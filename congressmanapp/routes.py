@@ -142,6 +142,29 @@ def wordcloudcongresista(twitter_user):
                                imagenComercio=imagenComercio
                                )
 
+@app.route("/opinion/<string:twitter_user>/", methods=['GET'])
+@login_required
+def opinion(twitter_user):
+    if request.method == 'GET':
+        congresistaUser = twitter_user
+        print(congresistaUser)
+        imagePath = "../../" + Congresistas.getWordCloud(congresistaUser)
+        print(imagePath)
+
+        imagenComercio = "../../"+Congresistas.getWordCloudComercio(congresistaUser)
+        print(imagenComercio)
+
+        congresistaInfo = Congresistas.getCongresista(congresistaUser)
+        positivo, negativo = Congresistas.getSentimentValues(congresistaUser)
+
+        return render_template('opinion.html', imagen=imagePath, form=OpinionForm(),
+                               twitter_user=congresistaUser,
+                               congresistaName=''.join(congresistaInfo["twitter_username"]),
+                               congresistaImg=''.join(congresistaInfo["img"]),
+                               pos=positivo,
+                               neg=negativo,
+                               imagenComercio=imagenComercio
+                               )
 
 @app.route("/enviaropinion", methods=['POST'])
 @login_required
@@ -153,4 +176,4 @@ def enviaropinion():
     message = Congresistas.saveOpinion(user, newOpinion)
     flash(message, 'success')
 
-    return redirect(url_for('wordcloudcongresista', twitter_user=user))
+    return redirect(url_for('opinion', twitter_user=user))
